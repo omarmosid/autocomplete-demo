@@ -1,6 +1,7 @@
 import { difference } from "lodash";
 import React, { createContext, useContext, useState } from "react";
 import { AutoCompleteProps, GetLabelType, GetValueType } from "types";
+import { getValueAsId } from "./utils";
 
 export type AutoCompleteContextType<T = any> = {
   inputValue?: string;
@@ -11,6 +12,7 @@ export type AutoCompleteContextType<T = any> = {
   getLabel?: GetLabelType<T>;
   getValue?: GetValueType<T>;
   notSelectedItems: Array<T>;
+  handleRemove: (id: string) => void;
 };
 
 export type AutoCompleteProviderProps = AutoCompleteProps;
@@ -20,6 +22,7 @@ export const AutoCompleteContext = createContext<AutoCompleteContextType>({
   selectedValue: [],
   options: [],
   notSelectedItems: [],
+  handleRemove: () => {},
 });
 
 export const AutoCompleteProvider: React.FC<AutoCompleteProviderProps> = ({
@@ -48,6 +51,15 @@ export const AutoCompleteProvider: React.FC<AutoCompleteProviderProps> = ({
   // Exclude items that have been already selected
   const notSelectedItems = difference(options, selectedValue || []);
 
+  const handleRemove = (id: string) => {
+    console.log(id)
+    const listWithRemovedItem = selectedValue.filter((item) => {
+      return id !== getValueAsId(item, getValue);
+    });
+    console.log(listWithRemovedItem)
+    setSelectedValue(listWithRemovedItem);
+  };
+
   return (
     <AutoCompleteContext.Provider
       value={{
@@ -59,6 +71,7 @@ export const AutoCompleteProvider: React.FC<AutoCompleteProviderProps> = ({
         getLabel,
         getValue,
         notSelectedItems,
+        handleRemove,
       }}
     >
       {children}

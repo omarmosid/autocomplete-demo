@@ -2,6 +2,7 @@ import React from "react";
 import { get, isObject, isString } from "lodash";
 import { useAutoComplete } from "./AutoCompleteContext";
 import { Chip } from "./Chip";
+import { getRenderLabel } from "./utils";
 
 type ChipsProps = {};
 
@@ -11,15 +12,11 @@ const Chips: React.FC<ChipsProps> = () => {
   return (
     <>
       {selectedValue?.map((item, index) => {
-        if (isString(item)) {
-          return <Chip key={index}>{item}</Chip>;
-        } else if (isObject(item)) {
-          if (getLabel) {
-            return <Chip key={index}>{getLabel(item)}</Chip>;
-          } else {
-            return <Chip key={index}>{get(item, "label", "")}</Chip>;
-          }
-        }
+        return (
+          <Chip key={index} item={item}>
+            {getRenderLabel(item, getLabel)}
+          </Chip>
+        );
       })}
     </>
   );
