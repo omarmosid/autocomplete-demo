@@ -1,3 +1,4 @@
+import { Container } from "components/lib/Container";
 import Head from "next/head";
 import React from "react";
 import { AutoComplete } from "../components/AutoComplete";
@@ -12,14 +13,16 @@ const Index = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <AutoComplete
-        value={[data[1], data[2]]}
-        onChange={(newValue) => console.log(newValue)}
-        options={data}
-        getLabel={(item) => item.name}
-        getValue={(item) => item.name}
-        resetOnSelect
-      />
+      <Container>
+        <AutoComplete
+          value={[data[1], data[2]]}
+          onChange={(newValue) => console.log(newValue)}
+          options={data}
+          getLabel={(item) => item.name}
+          getValue={(item) => item.name}
+          resetOnSelect
+        />
+      </Container>
     </div>
   );
 };

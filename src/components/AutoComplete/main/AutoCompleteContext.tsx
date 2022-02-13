@@ -1,5 +1,5 @@
-import { difference } from "lodash";
-import React, { createContext, useContext, useState } from "react";
+import { difference, isEmpty } from "lodash";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { AutoCompleteProps, GetLabelType, GetValueType } from "types";
 import { getValueAsId } from "./utils";
 
@@ -13,6 +13,10 @@ export type AutoCompleteContextType<T = any> = {
   getValue?: GetValueType<T>;
   notSelectedItems: Array<T>;
   handleRemove: (id: string) => void;
+  isListShown: boolean;
+  toggleListShown: () => void;
+  openList: () => void;
+  closeList: () => void;
 };
 
 export type AutoCompleteProviderProps = AutoCompleteProps;
@@ -22,7 +26,11 @@ export const AutoCompleteContext = createContext<AutoCompleteContextType>({
   selectedValue: [],
   options: [],
   notSelectedItems: [],
-  handleRemove: () => {},
+  handleRemove: () => undefined,
+  isListShown: false,
+  toggleListShown: () => undefined,
+  openList: () => undefined,
+  closeList: () => undefined,
 });
 
 export const AutoCompleteProvider: React.FC<AutoCompleteProviderProps> = ({
@@ -36,6 +44,8 @@ export const AutoCompleteProvider: React.FC<AutoCompleteProviderProps> = ({
 }) => {
   const [inputValue, setInputValue] = useState<string | undefined>("");
   const [selectedValue, setSelectedValue] = useState(initialValue);
+  const [isListShown, setIsListShown] = useState<boolean>(false);
+  const [isFocused, setIsFocused] = useState<boolean>(false)
 
   const onInputValueChange = (value?: string) => {
     setInputValue(value);
@@ -48,15 +58,23 @@ export const AutoCompleteProvider: React.FC<AutoCompleteProviderProps> = ({
     setSelectedValue([...selectedValue, value]);
   };
 
+  const toggleListShown = () => {
+    if (isListShown) setIsListShown(false);
+    else setIsListShown(true);
+  };
+
+  const openList = () => setIsListShown(true);
+  const closeList = () => setIsListShown(false);
+
   // Exclude items that have been already selected
   const notSelectedItems = difference(options, selectedValue || []);
 
   const handleRemove = (id: string) => {
-    console.log(id)
+    console.log(id);
     const listWithRemovedItem = selectedValue.filter((item) => {
       return id !== getValueAsId(item, getValue);
     });
-    console.log(listWithRemovedItem)
+    console.log(listWithRemovedItem);
     setSelectedValue(listWithRemovedItem);
   };
 
@@ -72,6 +90,10 @@ export const AutoCompleteProvider: React.FC<AutoCompleteProviderProps> = ({
         getValue,
         notSelectedItems,
         handleRemove,
+        isListShown,
+        toggleListShown,
+        openList,
+        closeList
       }}
     >
       {children}

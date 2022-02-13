@@ -21,6 +21,7 @@ const StyledChipContainer = styled.div`
     padding: 0.08em;
     margin-left: 0.6em;
     border: none;
+    cursor: pointer;
   }
   button:hover {
     background: #e1e1e1;

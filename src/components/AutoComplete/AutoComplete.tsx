@@ -8,7 +8,7 @@ import { Input } from "./main/Input";
 
 const StyledAutoCompleteContainer = styled.div`
   padding: 0.8em 1.2em;
-  max-width: 40em;
+  width: 42em;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0px 0px 12px #eee;
@@ -39,7 +39,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
           <Chips />
           <Input />
         </StyledAutoCompleteContainer>
-        <Debug />
+        {/* <Debug /> */}
       </AutoCompleteProvider>
     </>
   );
