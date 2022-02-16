@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
-import { difference, filter, isEmpty, set } from "lodash";
-import React, { useEffect, useRef, useState } from "react";
 import { useKeyPress } from "hooks";
+import { isEmpty } from "lodash";
+import React, { useEffect, useState } from "react";
+import { AddNew } from "./AddNew";
 import { useAutoComplete } from "./AutoCompleteContext";
 import { ListItem } from "./ListItem";
-import { getRenderLabel, getValueAsId } from "./utils";
-import { AddNew } from "./AddNew";
+import { getRenderLabel } from "./utils";
 
 type ListProps = {};
 
@@ -49,7 +49,7 @@ const List: React.FC<ListProps> = () => {
   // Form Regex to filter options on
   const inputRegex = new RegExp(inputValue || "");
 
-  // Filter based on entered input
+  // Filter based on entered input and append a new item based on input
   const filtered = notSelectedItems
     .filter((item, index) => {
       const str = getRenderLabel(item, getLabel);
@@ -62,10 +62,10 @@ const List: React.FC<ListProps> = () => {
       },
     ]);
 
-  // const isOptionShown = !isEmpty(inputValue) && filtered.length !== 0;
-
+  // State to keep track of keyboard nav
   const [cursor, setCursor] = useState<number>(0);
 
+  // Hooks to keep track of keypresses
   const isArrowUpKeyPressed = useKeyPress("ArrowUp");
   const isArrowDownKeyPressed = useKeyPress("ArrowDown");
   const isEnterKeyPressed = useKeyPress("Enter");
@@ -97,6 +97,7 @@ const List: React.FC<ListProps> = () => {
     }
   }, [isArrowUpKeyPressed]);
 
+  // Close list when user presses escape
   useEffect(() => {
     if (isEscapeKeyPressed) {
       if (isListShown) {
@@ -105,29 +106,29 @@ const List: React.FC<ListProps> = () => {
     }
   }, [isEscapeKeyPressed]);
 
-  useEffect(() => {
-    if (!isEmpty(inputValue)) openList();
-    else closeList();
-  }, [inputValue]);
-
+  // Add new item when user presses enter
   useEffect(() => {
     if (isEnterKeyPressed) {
       if (onSelectedValueChange) onSelectedValueChange(filtered[cursor]);
     }
   }, [isEnterKeyPressed]);
 
+  useEffect(() => {
+    if (!isEmpty(inputValue)) openList();
+    else closeList();
+  }, [inputValue]);
+
   return (
     <>
-      <StyledList isListShown={isListShown && filtered.length !== 0} aria-expanded={!isListShown}>
+      <StyledList
+        isListShown={isListShown && filtered.length !== 0}
+        aria-expanded={!isListShown}
+      >
         <ul id="dropdown">
           {filtered.map((item, index) => {
             if (index === filtered.length - 1) {
               return (
-                <AddNew
-                  key={index}
-                  active={index === cursor}
-                  item={item}
-                />
+                <AddNew key={index} active={index === cursor} item={item} />
               );
             }
             return (

@@ -1,10 +1,9 @@
+import styled from "@emotion/styled";
 import React from "react";
-import { get, isObject, isString } from "lodash";
 import { useAutoComplete } from "./AutoCompleteContext";
 import { Chip } from "./Chip";
-import { getRenderLabel } from "./utils";
-import styled from "@emotion/styled";
 import { Input } from "./Input";
+import { getRenderLabel } from "./utils";
 
 type ChipsProps = {};
 

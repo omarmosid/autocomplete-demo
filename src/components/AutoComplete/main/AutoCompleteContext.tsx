@@ -1,5 +1,5 @@
-import { difference, isEmpty } from "lodash";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { difference } from "lodash";
+import React, { createContext, useContext, useState } from "react";
 import { AutoCompleteProps, GetLabelType, GetValueType } from "types";
 import { getValueAsId } from "./utils";
 
@@ -45,7 +45,6 @@ export const AutoCompleteProvider: React.FC<AutoCompleteProviderProps> = ({
   const [inputValue, setInputValue] = useState<string | undefined>("");
   const [selectedValue, setSelectedValue] = useState(initialValue);
   const [isListShown, setIsListShown] = useState<boolean>(false);
-  const [isFocused, setIsFocused] = useState<boolean>(false)
 
   const onInputValueChange = (value?: string) => {
     setInputValue(value);
@@ -93,7 +92,7 @@ export const AutoCompleteProvider: React.FC<AutoCompleteProviderProps> = ({
         isListShown,
         toggleListShown,
         openList,
-        closeList
+        closeList,
       }}
     >
       {children}

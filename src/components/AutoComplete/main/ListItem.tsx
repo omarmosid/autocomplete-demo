@@ -1,6 +1,5 @@
-import styled, { StyledComponent } from "@emotion/styled";
-import { get, isNumber, isObject, isString } from "lodash";
-import React, { useEffect } from "react";
+import styled from "@emotion/styled";
+import React from "react";
 import { useAutoComplete } from "./AutoCompleteContext";
 import { getRenderLabel } from "./utils";
 
@@ -35,7 +34,11 @@ const ListItem: React.FC<ListItemProps> = ({ active, item }) => {
 
   return (
     <>
-      <StyledListItemContainer active={active} onClick={handleClick} className="list-item">
+      <StyledListItemContainer
+        active={active}
+        onClick={handleClick}
+        className="list-item"
+      >
         {getRenderLabel(item, getLabel)}
       </StyledListItemContainer>
     </>

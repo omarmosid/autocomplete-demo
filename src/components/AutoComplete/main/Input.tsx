@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
-import { isEmpty } from "lodash";
-import React, { useState } from "react";
+import React from "react";
 import { useAutoComplete } from "./AutoCompleteContext";
 import { List } from "./List";
 
@@ -32,15 +31,14 @@ const Input: React.FC<InputProps> = () => {
     selectedValue,
     onSelectedValueChange,
     openList,
-    closeList
+    closeList,
   } = props;
-
 
   const handleChange = (value: string) => {
     if (onInputValueChange) {
       onInputValueChange(value);
     }
-  }
+  };
 
   // const handleFocus = () => {
   //   console.log("FOCUSED")

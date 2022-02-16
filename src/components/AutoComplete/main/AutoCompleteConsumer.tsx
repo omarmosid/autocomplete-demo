@@ -1,9 +1,8 @@
 import styled from "@emotion/styled";
 import React from "react";
+import ClickAwayListener from "react-click-away-listener";
 import { useAutoComplete } from "./AutoCompleteContext";
 import { Chips } from "./Chips";
-import { Input } from "./Input";
-import ClickAwayListener from "react-click-away-listener";
 
 type AutoCompleteConsumerProps = {};
 
@@ -33,3 +32,4 @@ const AutoCompleteConsumer: React.FC<AutoCompleteConsumerProps> = () => {
 };
 
 export { AutoCompleteConsumer };
+
