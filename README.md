@@ -8,6 +8,19 @@ Tried to make the component accessible by following the guidelines mentioned her
 
 Demo Link: https://autocomplete-demo.vercel.app/
 
+## Component Usage
+
+```tsx
+<AutoComplete
+  value={data]}
+  onChange={(newValue) => console.log(newValue)}
+  options={data}
+  getLabel={(item) => item.name}
+  getValue={(item) => item.name}
+  resetOnSelect
+/>
+```
+
 ## Local Dev
 
 1. Clone/Fork repo
