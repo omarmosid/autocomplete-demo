@@ -35,7 +35,7 @@ const ListItem: React.FC<ListItemProps> = ({ active, item }) => {
 
   return (
     <>
-      <StyledListItemContainer active={active} onClick={handleClick}>
+      <StyledListItemContainer active={active} onClick={handleClick} className="list-item">
         {getRenderLabel(item, getLabel)}
       </StyledListItemContainer>
     </>

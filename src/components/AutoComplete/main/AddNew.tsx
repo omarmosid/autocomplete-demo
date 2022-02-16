@@ -9,7 +9,7 @@ type AddNewProps<T = any> = {
   item: T;
 };
 
-const StyledAddNew = styled.div<Pick<AddNewProps, "active">>`
+const StyledAddNew = styled.li<Pick<AddNewProps, "active">>`
   padding: 0.6em 1em;
   font-weight: 500;
   cursor: pointer;

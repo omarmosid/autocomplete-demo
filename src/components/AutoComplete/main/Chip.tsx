@@ -36,7 +36,7 @@ const Chip: React.FC<ChipProps> = ({ children, item }) => {
 
   return (
     <>
-      <StyledChipContainer>
+      <StyledChipContainer className="chip">
         {children}
         <button
           type="button"

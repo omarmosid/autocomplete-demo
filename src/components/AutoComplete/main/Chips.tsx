@@ -23,7 +23,7 @@ const Chips: React.FC<ChipsProps> = () => {
 
   return (
     <>
-      <StyledChips>
+      <StyledChips className="chips">
         {selectedValue?.map((item, index) => {
           return (
             <Chip key={index} item={item}>

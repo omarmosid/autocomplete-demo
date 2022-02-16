@@ -119,7 +119,7 @@ const List: React.FC<ListProps> = () => {
   return (
     <>
       <StyledList isListShown={isListShown && filtered.length !== 0} aria-expanded={!isListShown}>
-        <ul>
+        <ul id="dropdown">
           {filtered.map((item, index) => {
             if (index === filtered.length - 1) {
               return (

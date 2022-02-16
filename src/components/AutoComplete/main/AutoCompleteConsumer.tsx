@@ -3,7 +3,7 @@ import React from "react";
 import { useAutoComplete } from "./AutoCompleteContext";
 import { Chips } from "./Chips";
 import { Input } from "./Input";
-import ClickAwayListener from "react-click-away-listener"
+import ClickAwayListener from "react-click-away-listener";
 
 type AutoCompleteConsumerProps = {};
 
@@ -24,13 +24,7 @@ const AutoCompleteConsumer: React.FC<AutoCompleteConsumerProps> = () => {
   return (
     <>
       <ClickAwayListener onClickAway={() => closeList()}>
-        <StyledAutoCompleteConsumer
-          role="combobox"
-          onFocus={() => {
-            openList();
-            console.log("focused");
-          }}
-        >
+        <StyledAutoCompleteConsumer role="combobox">
           <Chips />
         </StyledAutoCompleteConsumer>
       </ClickAwayListener>
