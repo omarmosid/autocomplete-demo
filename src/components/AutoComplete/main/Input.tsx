@@ -8,14 +8,14 @@ type InputProps = {};
 
 const StyledInputContainer = styled.div`
   position: relative;
-  display: grid;
+  display: block;
   input {
     display: inline-flex;
-    flex: 2 1 100%;
+    width: auto;
+    height: 2em;
     border: none;
     outline: none;
     font-size: 1em;
-    // border: 1px solid red;
   }
   input::placeholder {
     color: #ddd;
@@ -42,15 +42,15 @@ const Input: React.FC<InputProps> = () => {
     }
   }
 
-  const handleFocus = () => {
-    console.log("FOCUSED")
-    if (!isEmpty(inputValue)) openList();
-  };
+  // const handleFocus = () => {
+  //   console.log("FOCUSED")
+  //   if (!isEmpty(inputValue)) openList();
+  // };
 
-  const handleBlur = () => {
-    console.log("BLURRED")
-    closeList();
-  }
+  // const handleBlur = () => {
+  //   console.log("BLURRED")
+  //   closeList();
+  // }
 
   return (
     <>
@@ -61,7 +61,7 @@ const Input: React.FC<InputProps> = () => {
           placeholder="+ Add Astronaut"
           value={inputValue}
           onChange={(e) => handleChange(e.target.value)}
-          onFocus={handleFocus}
+          // onFocus={handleFocus}
           // onBlur={handleBlur}
         />
 

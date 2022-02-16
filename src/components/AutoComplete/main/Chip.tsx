@@ -9,8 +9,9 @@ type ChipProps = {
   item: unknown;
 };
 
-const StyledChipContainer = styled.div`
+const StyledChipContainer = styled.li`
   padding: 0.3em 0.6em;
+  list-style: none;
   display: inline-flex;
   border-radius: 0.5em;
   background: #ededed;

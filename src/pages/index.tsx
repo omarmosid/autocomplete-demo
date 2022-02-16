@@ -15,7 +15,7 @@ const Index = () => {
 
       <Container>
         <AutoComplete
-          value={[data[1], data[2]]}
+          value={[data[1]]}
           onChange={(newValue) => console.log(newValue)}
           options={data}
           getLabel={(item) => item.name}

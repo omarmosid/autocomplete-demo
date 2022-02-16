@@ -1,22 +1,22 @@
-import styled, { StyledComponent } from "@emotion/styled";
-import { get, isNumber, isObject, isString } from "lodash";
-import React, { useEffect } from "react";
+import styled from "@emotion/styled";
+import { isEmpty } from "lodash";
+import React from "react";
 import { useAutoComplete } from "./AutoCompleteContext";
 import { getRenderLabel } from "./utils";
 
-type ListItemProps<T = any> = {
+type AddNewProps<T = any> = {
   active: boolean;
   item: T;
 };
 
-export const StyledListItemContainer = styled.li<Pick<ListItemProps, "active">>`
+const StyledAddNew = styled.div<Pick<AddNewProps, "active">>`
   padding: 0.6em 1em;
   font-weight: 500;
   cursor: pointer;
   background: ${(props) => (props.active ? "#ededed" : "#fff")};
 `;
 
-const ListItem: React.FC<ListItemProps> = ({ active, item }) => {
+const AddNew: React.FC<AddNewProps> = ({ item, active }) => {
   const {
     getLabel,
     getValue,
@@ -24,6 +24,7 @@ const ListItem: React.FC<ListItemProps> = ({ active, item }) => {
     onSelectedValueChange,
     openList,
     closeList,
+    inputValue,
   } = useAutoComplete();
 
   const handleClick = () => {
@@ -33,13 +34,15 @@ const ListItem: React.FC<ListItemProps> = ({ active, item }) => {
     closeList();
   };
 
+  if (isEmpty(inputValue)) {
+    return <></>;
+  }
+
   return (
-    <>
-      <StyledListItemContainer active={active} onClick={handleClick}>
-        {getRenderLabel(item, getLabel)}
-      </StyledListItemContainer>
-    </>
+    <StyledAddNew active={active} onClick={handleClick}>
+      Add {getRenderLabel(item, getLabel)}
+    </StyledAddNew>
   );
 };
 
-export { ListItem };
+export { AddNew };
