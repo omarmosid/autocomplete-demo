@@ -12,7 +12,7 @@ Demo Link: https://autocomplete-demo.vercel.app/
 
 ```tsx
 <AutoComplete
-  value={data]}
+  value={data}
   onChange={(newValue) => console.log(newValue)}
   options={data}
   getLabel={(item) => item.name}
